@@ -17,6 +17,7 @@ app.get('/call/:campaign', function(req, res) {
     res.render('campaign_full', { 
       titles: this_campaign.titles,
       metadata: this_campaign.metadata,
+      text: this_campaign.text,
     });
   } else {
     res.sendStatus(404);
