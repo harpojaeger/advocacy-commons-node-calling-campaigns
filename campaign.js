@@ -13,7 +13,8 @@ module.exports = {
   loadJSON: function(slug) {
     try {
 			var doc = JSON.parse(fs.readFileSync('campaigns/campaigns.json', 'utf8'));
-			return doc[slug];
+			if (doc[slug]) return doc[slug];
+			return false;
 		} catch (e) {
 			console.log(e);
 		}
