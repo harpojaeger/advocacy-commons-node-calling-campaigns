@@ -1,13 +1,21 @@
 var express = require('express');
 var app = express();
 
+var campaign = require('./campaign');
+
+yaml = require('js-yaml');
+fs = require('fs');
+
 app.set('port', (process.env.PORT || 5000));
 app.set('view engine', 'pug')
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/call/:campaign(*)??', function(req, res) {
-  res.render('campaign_full', { title: 'A campaign page', message: 'This is the page for the ' + req.params.campaign + ' campaign.' })
+app.get('/call/:campaign', function(req, res) {
+  this_campaign = campaign.load(req.params.campaign);
+  this_JSON_campaign = campaign.loadJSON(req.params.campaign);
+  console.dir(this_JSON_campaign);
+  res.render('campaign_full', { title: this_campaign.title })
 });
 
 app.get('*', function(req, res) {
