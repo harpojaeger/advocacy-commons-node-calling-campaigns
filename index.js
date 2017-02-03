@@ -12,10 +12,14 @@ app.set('view engine', 'pug')
 app.use(express.static(__dirname + '/public'));
 
 app.get('/call/:campaign', function(req, res) {
-  this_campaign = campaign.load(req.params.campaign);
-  this_JSON_campaign = campaign.loadJSON(req.params.campaign);
-  console.dir(this_JSON_campaign);
-  res.render('campaign_full', { title: this_campaign.title })
+  this_campaign = campaign.loadJSON(req.params.campaign);
+  console.dir(this_campaign);
+  if( typeof this_campaign === 'undefined' )
+    { campaign_title = 'Default title' }
+  else
+    { campaign_title = this_campaign.title; }
+  
+  res.render('campaign_full', { title: campaign_title })
 });
 
 app.get('*', function(req, res) {
