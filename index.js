@@ -13,10 +13,9 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/call/:campaign', function(req, res) {
   this_campaign = campaign.loadJSON(req.params.campaign);
-  console.dir(this_campaign);
   if( this_campaign ) {
     res.render('campaign_full', { 
-      title: this_campaign.title,
+      titles: this_campaign.titles,
       metadata: this_campaign.metadata,
     });
   } else {

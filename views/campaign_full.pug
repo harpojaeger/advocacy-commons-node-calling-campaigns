@@ -1,7 +1,6 @@
 html
   head
-    title
-      | Stop Trump's Cabinet
+    title #{titles.page}
     |     
     meta(charset='utf-8')
     |     
@@ -38,7 +37,7 @@ html
               a(href='http://enable-javascript.com/', target='_blank') Here
               |  are some instructions.
           #form_title_container
-            #form_title #{title}
+            #form_title #{titles.form}
           #form_container
             form#caller_data
               ul#main_form_elements
