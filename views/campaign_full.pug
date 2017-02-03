@@ -19,16 +19,8 @@ html
     |     
     script(type='text/javascript', src='/app/load.js')
     |     
-    script(type='text/javascript').
-      (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1263403627085263";
-      fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    |     
-    |     
+    script(type='text/javascript')
+      include includes/fb.js
     meta(property='og:url', content='http://www.advocacycommons.org/call/tillerson-senate')
     |     
     meta(property='og:title', content="Stop Trump's Cabinet")
@@ -102,7 +94,8 @@ html
               p
                 em Help us build a powerful rapid-response network.
               #share_widgets_container
-                #fb_share_container.share-container                  .fb-share-button(data-href='http://www.advocacycommons.org/call/tillerson-senate', data-layout='button', data-size='large', data-mobile-iframe='true')
+                #fb_share_container.share-container
+                  .fb-share-button(data-href='http://www.advocacycommons.org/call/tillerson-senate', data-layout='button', data-size='large', data-mobile-iframe='true')
                     a.fb-xfbml-parse-ignore(target='_blank', href='https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.advocacycommons.org%2Fcall%2Ftillerson-senate&src=sdkpreparse') Share
                 #tw_share_container.share-container
                   a.twitter-share-button(href='https://twitter.com/share', data-size='large', data-text='The Senate has started debate on Rex Tillerson. Tell your Senator to vote NO.', data-show-count='false') Tweet
