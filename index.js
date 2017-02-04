@@ -12,14 +12,17 @@ app.set('view engine', 'pug')
 app.use(express.static(__dirname + '/public'));
 
 app.get('/call/:campaign', function(req, res) {
-  this_campaign = campaign.loadJSON(req.params.campaign);
+  var this_campaign = campaign.loadJSON(req.params.campaign);
+  var this_url = req.protocol + '://' + req.get('host') + req.originalUrl;
   if( this_campaign ) {
     res.render('campaign_full', { 
       campaign: this_campaign,
       titles: this_campaign.titles,
       metadata: this_campaign.metadata,
       text: this_campaign.text,
+      this_url: this_url,
     });
+
   } else {
     res.sendStatus(404);
   }
