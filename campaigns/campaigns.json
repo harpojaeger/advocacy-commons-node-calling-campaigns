@@ -30,6 +30,14 @@
 	  "social" : {
 
 
-	  }
+	  },
+		"logos" : [
+			"/imgs/logos/kos.png",
+			"/imgs/logos/dems_xsmall.gif",
+			"/imgs/logos/www_horiz.jpg",
+			"/imgs/logos/WAND.png",
+			"/imgs/logos/DianeRussell.png",
+			"/imgs/logos/ccan.gif"
+		]
 	}
 }

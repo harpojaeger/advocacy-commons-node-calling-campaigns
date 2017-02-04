@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-
 var campaign = require('./campaign');
 
 yaml = require('js-yaml');
@@ -15,11 +14,8 @@ app.get('/call/:campaign', function(req, res) {
   var this_campaign = campaign.loadJSON(req.params.campaign);
   var this_url = req.protocol + '://' + req.get('host') + req.originalUrl;
   if( this_campaign ) {
-    res.render('campaign_full', {
+    res.render('campaign', {
       campaign: this_campaign,
-      titles: this_campaign.titles,
-      metadata: this_campaign.metadata,
-      text: this_campaign.text,
       this_url: this_url,
     });
 

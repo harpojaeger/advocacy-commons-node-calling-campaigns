@@ -1,8 +1,6 @@
-//Need to get the a href attr working – encodeURIComponent?
 - var encoded_title = encodeURIComponent(this_url);
 - var full_fb_href = 'https://www.facebook.com/sharer/sharer.php?u=' + encoded_title + '&amp;src=sdkpreparse';
-- console.log(encoded_title);
-- console.log(full_fb_href);
+
 .fb-share-button(data-href=this_url data-layout="button" data-size="large" data-mobile-iframe="true")
   a.fb-xfbml-parse-ignore(target="_blank" href=full_fb_href)
     Share
