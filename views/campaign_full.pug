@@ -11,7 +11,7 @@ html
     script(type='text/javascript', src='/app/load.js')
     script(type='text/javascript')
       include includes/fb.js
-
+    meta(property="og:url", content=this_url)
     each content, property in campaign.metadata
       meta(property=property, content=content)
 

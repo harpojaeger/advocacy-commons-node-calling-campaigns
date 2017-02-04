@@ -6,8 +6,6 @@
 	  },
 	  "metadata": {
 	    "og:title": "Stop Trump's Cabinet",
-	    "og:url": "http://www.advocacycommons.org/call/tillerson-senate",
-	    "og:title": "Stop Trump's Cabinet",
 	    "og:description": "The Senate has started debating Tillerson's nomination.  Our free tool makes it easy to call: tell your Senators to vote NO on Rex Tillerson.",
 	    "og:type": "website",
 	    "og:image:url": "http://www.advocacycommons.org/imgs/fa-bullhorn.png",
@@ -22,7 +20,7 @@
 	       "To call your senators, fill in the form and use the sample script that appears on the next page to urge them to oppose Tillerson.  Be sure to check the box below your cellphone number to receive action alerts on other nominees.",
 	       "And after you've made your calls, please share this page far and wide through Facebook, Twitter and email."
 	    ],
-	    "script" : [ 
+	    "script" : [
 	      "<strong>Text TRex to 698-66 or call 1-888-407-1644 to be automatically connected to your Senators.</strong>  To be connected to your second Senator, please text TRex again, or call the same number a second time.",
 	      "Call script:",
 	      "<blockquote><em>Hi, my name is ____, and I am your constituent calling from _____. I am calling to urge Senator ____ to vote against the nomination of Rex Tillerson for Secretary of State.</em></blockquote>",
@@ -30,8 +28,8 @@
 	    ]
 	  },
 	  "social" : {
-	    
-	  
+
+
 	  }
 	}
 }

@@ -15,7 +15,7 @@ app.get('/call/:campaign', function(req, res) {
   var this_campaign = campaign.loadJSON(req.params.campaign);
   var this_url = req.protocol + '://' + req.get('host') + req.originalUrl;
   if( this_campaign ) {
-    res.render('campaign_full', { 
+    res.render('campaign_full', {
       campaign: this_campaign,
       titles: this_campaign.titles,
       metadata: this_campaign.metadata,
@@ -26,8 +26,8 @@ app.get('/call/:campaign', function(req, res) {
   } else {
     res.sendStatus(404);
   }
-  
-  
+
+
 });
 
 app.get('*', function(req, res) {
