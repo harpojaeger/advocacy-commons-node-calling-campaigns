@@ -1,26 +1,17 @@
 html
   head
     title= campaign.titles.page
-    |     
     meta(charset='utf-8')
-    |     
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    |     
     link(rel='stylesheet', type='text/css', href='/style/style.css')
-    |     
     script(type='text/javascript', src='/lib/jquery.js')
-    |     
     script(type='text/javascript', src='/lib/jquery.osdi.js')
-    |     
     script(type='text/javascript', src='/lib/parsley.js')
-    |     
     script(type='text/javascript', src='/app/validate.js')
-    |     
     script(type='text/javascript', src='/app/load.js')
-    |     
     script(type='text/javascript')
       include includes/fb.js
-       
+
     each content, property in campaign.metadata
       meta(property=property, content=content)
 
@@ -33,11 +24,11 @@ html
           noscript
             span#no_js_warning
               br
-              | It looks like you have JavaScript disabled.  You'll need it to use this site.  
+              | It looks like you have JavaScript disabled.  You'll need it to use this site.
               a(href='http://enable-javascript.com/', target='_blank') Here
               |  are some instructions.
           #form_title_container
-            #form_title #{campaign.titles.form}
+            #form_title= campaign.titles.form
           #form_container
             form#caller_data
               ul#main_form_elements
@@ -50,7 +41,7 @@ html
                 li
                   input#sms_opt_in_checkbox(type='checkbox')
                   label#sms_opt_in_label(for='sms_opt_in_checkbox')
-                    |  I'd like to receive mobile action alerts to stop Trump nominees. Msg & data rates may apply. You may opt out at any time. 
+                    |  I'd like to receive mobile action alerts to stop Trump nominees. Msg & data rates may apply. You may opt out at any time.
                     a#terms_link(href='javascript:;') Terms & Conditions
                     | .
                 li
