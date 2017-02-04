@@ -8,7 +8,7 @@
 	    "og:title": "Stop Trump's Cabinet",
 	    "og:description": "The Senate has started debating Tillerson's nomination.  Our free tool makes it easy to call: tell your Senators to vote NO on Rex Tillerson.",
 	    "og:type": "website",
-	    "og:image:url": "http://www.advocacycommons.org/imgs/fa-bullhorn.png",
+	    "og:image:url": "https://ac-node-calling-campaigns.herokuapp.com/imgs/fa-bullhorn.png",
 	    "og:image:width": "325",
 	    "og:image:height": "245",
 	    "og:image:type": "image/png"
