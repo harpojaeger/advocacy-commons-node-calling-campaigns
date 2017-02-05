@@ -1,0 +1,81 @@
+html
+  head
+    title= campaign.titles.page
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', type='text/css', href='/style/style.css')
+    script(type='text/javascript', src='/lib/jquery.js')
+    script(type='text/javascript', src='/lib/jquery.osdi.js')
+    script(type='text/javascript', src='/lib/parsley.js')
+    script(type='text/javascript', src='/app/validate.js')
+    script(type='text/javascript', src='/app/load.js')
+    script(type='text/javascript')
+      include includes/fb.js
+    meta(property="og:url", content=this_url)
+    each content, property in campaign.metadata
+      meta(property=property, content=content)
+
+  body
+    #wrapper
+      #header
+        span.header-item A project of Advocacy Commons
+      #padded_wrapper
+        #content
+          noscript
+            span#no_js_warning
+              br
+              | It looks like you have JavaScript disabled.  You'll need it to use this site.
+              a(href='http://enable-javascript.com/', target='_blank') Here
+              |  are some instructions.
+          #form_title_container
+            #form_title= campaign.titles.form
+          #form_container
+            form#caller_data
+              ul#main_form_elements
+                li
+                  input#email_address(type='text', placeholder='Email address', data-parsley-required, data-parsley-type='email', data-parsley-type-message='Please enter a valid email address.')
+                li
+                  input#postal_code(type='text', placeholder='ZIP code', data-parsley-required, data-parsley-zipcode)
+                li
+                  input#phone_number(type='text', placeholder='Cell phone', data-parsley-required, data-parsley-type='digits', data-parsley-type-message='Please enter numbers only.')
+                li
+                  input#sms_opt_in_checkbox(type='checkbox')
+                  label#sms_opt_in_label(for='sms_opt_in_checkbox')
+                    |  I'd like to receive mobile action alerts to stop Trump nominees. Msg & data rates may apply. You may opt out at any time.
+                    a#terms_link(href='javascript:;') Terms & Conditions
+                    | .
+                li
+                  input#given_name(type='text', placeholder='First name')
+                li
+                  input#family_name(type='text', placeholder='Last name')
+                li
+                  input#main_submit(type='submit', value="Let's go!")
+                li#email_subscription_controls
+                  a#reveal_email_subscription_preferences(href='javascript:;') Edit subscription preferences
+                  #email_subscription_preferences
+                    input#email_opt_in_check(type='checkbox', checked='true')
+                    label#email_opt_in_label(for='email_opt_in_check') Opt me in to rapid-response action alerts from Advocacy Commons.
+          #meta_form
+            #script.after-submit-reveal
+              each p in campaign.text.script
+                p!= p
+            #sharing.after-submit-reveal
+              p
+                em Help us build a powerful rapid-response network.
+              #share_widgets_container
+                #fb_share_container.share-container
+                  include includes/fb.pug
+                #tw_share_container.share-container
+                  include includes/tw.pug
+            #form_teaser
+              each p in campaign.text.teaser
+                p= p
+              a#show_full_form_desc(href='javascript:;') (show full description)
+            #form_full_desc
+              each p in campaign.text.full
+                p= p
+          #footer
+            #partner_logos
+              each logo in campaign.logos
+                .partner-logo-div
+                  img.partner-image(src=logo)
