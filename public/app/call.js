@@ -20,7 +20,7 @@ function callMeMaybe(phone,zip) {
 			}
 		}
 	});
-	
+
   //Call Power Bioguide ID targeting can go here.
 	var data = {
 		campaignId: 7,
@@ -48,7 +48,6 @@ function callMeMaybe(phone,zip) {
 			  .slideDown();
 			$('div#form_container').fadeTo(500,0.2);
 			$('input').attr('disabled','true');
-			
 		}
 	});
 }

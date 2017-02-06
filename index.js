@@ -1,8 +1,7 @@
 var express = require('express');
 var app = express();
-var campaign = require('./campaign');
 
-yaml = require('js-yaml');
+var calls = require('./routes/calls')
 fs = require('fs');
 
 app.set('port', (process.env.PORT || 5000));
@@ -10,21 +9,8 @@ app.set('view engine', 'pug')
 
 app.use(express.static(__dirname + '/public'));
 
-app.get('/call/:campaign', function(req, res) {
-  var this_campaign = campaign.loadJSON(req.params.campaign);
-  var this_url = req.protocol + '://' + req.get('host') + req.originalUrl;
-  if( this_campaign ) {
-    res.render('campaign', {
-      campaign: this_campaign,
-      this_url: this_url,
-    });
+app.use('/calls', calls)
 
-  } else {
-    res.sendStatus(404);
-  }
-
-
-});
 
 app.get('*', function(req, res) {
   res.send('Hello world.');
