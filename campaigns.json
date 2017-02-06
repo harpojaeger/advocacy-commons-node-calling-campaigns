@@ -1,8 +1,12 @@
 {
 	"new-campaign" : {
-	  "titles": {
-	    "page" : "the page title",
-	    "form" : "Stop Betsy DeVos"
+		"endpoint" : {
+			"type" : "osdi:record_submission_helper",
+			"url" : "https://actionnetwork.org/api/v2/forms/0ffd7fb8-1846-4acc-9f1b-4ecabc86500b/submissions"
+		},
+	  "titles" : {
+	    "page" : "Stop Trump's Cabinet",
+	    "form" : "Stop Rex Tillerson"
 	  },
 	  "metadata": {
 	    "og:title": "Stop Trump's Cabinet",

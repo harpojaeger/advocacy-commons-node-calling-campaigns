@@ -4,9 +4,11 @@
   "description": "Create call-in campaigns to target elected officials.",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "^1.16.0",
     "express": "^4.14.1",
     "fs": "0.0.1-security",
-    "pug": "^2.0.0-beta10"
+    "pug": "^2.0.0-beta10",
+    "request": "^2.79.0"
   },
   "devDependencies": {},
   "scripts": {

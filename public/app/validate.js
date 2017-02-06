@@ -53,7 +53,7 @@ $(document).ready(function(){
 	    'person' : {
 	      'given_name' : $('input#given_name').val(),
 				'family_name' : $('input#family_name').val(),
-	      'email_addresses' : [ 
+	      'email_addresses' : [
 	        {
 	          'address' : $('input#email_address').val(),
 	          'status' : email_subscription_status
