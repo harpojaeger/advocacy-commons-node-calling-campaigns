@@ -5,18 +5,19 @@ var campaigns = require(__dirname + '/../campaigns');
 
 // middleware that is specific to this router
 router.use(function timeLog (req, res, next) {
+  // this_url seems to get used a lot, so let's define it once per request.
+  this_url = req.protocol + '://' + req.get('host') + req.originalUrl;
   console.log(Date.now() + ' ' + req.originalUrl);
   next();
 })
 // define the home page route
 router.get('/', function (req, res) {
-  res.send('List of available actions');
+  res.send('List of available actions.');
 })
 
 // Handle individual campaigns
 router.get('/:campaign', function(req, res) {
   var this_campaign = campaigns.load(req.params.campaign);
-  var this_url = req.protocol + '://' + req.get('host') + req.originalUrl;
   if( this_campaign ) {
     res.render('campaign', {
       campaign: this_campaign,
