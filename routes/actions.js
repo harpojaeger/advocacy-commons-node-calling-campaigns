@@ -15,17 +15,23 @@ router.get('/', function (req, res) {
   res.send('List of available actions.');
 })
 
+router.use('/:campaign', function(req, res, next) {
+  if( !(this_campaign = campaigns.load(req.params.campaign)) ) {
+    console.log('Campaign not found.');
+    res.sendStatus(404).end();
+  } else {
+    res.locals.this_campaign = this_campaign;
+    console.log('Campaign found');
+    next();
+  }
+});
+
 // Handle individual campaigns
 router.get('/:campaign', function(req, res) {
-  var this_campaign = campaigns.load(req.params.campaign);
-  if( this_campaign ) {
-    res.render('campaign', {
-      campaign: this_campaign,
-      this_url: this_url,
-    });
-  } else {
-    res.sendStatus(404);
-  }
+  res.render('campaign', {
+    campaign: res.locals.this_campaign,
+    this_url: this_url,
+  });
 });
 
 // Handle submitted data from a campaign – flexibly.
@@ -65,40 +71,42 @@ router.post('/:campaign', function(req, res) {
       'sms_opt_in' : '1'
     }
   };
-  // Validate req.body.data against OSDI standard.  Return a 400 error if bad?
-  //if(bad_request) get_angry;
 
-  //Assuming we have OSDI-compliant data:
-  var this_campaign = campaigns.load(req.params.campaign);
-
-  // Make sure an endpoint is specified for this campaign in campaigns.json
-  if ( endpoint = this_campaign.endpoint ) {
-    console.log('Got endpoint for ' + req.originalUrl);
-
-    // This might be unnecessary if we've already validated the data.
-    if(endpoint.type == "osdi:record_submission_helper") {
-
-      // POST the data to this particular campaign's endpoint.
-      request.post(
-
-        // The endpoint URL from campaigns.json
-        endpoint.url,
-
-        // The OSDI data submitted.
-        { json: req.body.osdi_data },
-        function optionalCallback(err, httpResponse, body) {
-          if (err) {
-            return console.error('OSDI POST failed: ', err);
-            res.send('It failed!');
-          }
-          console.log('OSDI POST successful! ', httpResponse.headers.status);
-          res.send('It worked!');
-        }
-      );
-    }
+  //Make sure the data is being submitted to the right placeholder
+  if( req.body.campaign != req.params.campaign ) {
+    console.log('Submitted data is invalid (campaign mismatch).')
+    res.sendStatus(400).end();
   } else {
-    console.log('No endpoint found for ' + req.originalUrl);
-    res.sendStatus(404);
+    // Validate req.body.data against OSDI standard.  Return a 400 error if bad?
+    //if(bad_request) get_angry;
+
+    //Assuming we have OSDI-compliant data, check for an endpoint.
+    if ( endpoint = res.locals.this_campaign.endpoint ) {
+      console.log('Got endpoint for ' + req.originalUrl);
+
+      // This might be unnecessary if we've already validated the data.
+      if(endpoint.type == "osdi:record_submission_helper") {
+
+        // POST the data to this particular campaign's endpoint.
+        request.post(
+
+          // The endpoint URL from campaigns.json
+          endpoint.url,
+
+          // The OSDI data submitted.
+          { json: req.body.osdi_data },
+          function optionalCallback(err, httpResponse, body) {
+            if (err) {
+              console.error('OSDI POST failed: ', err);
+              // Pretty sure 502 is the right error code for this.
+              res.send('It failed!').sendStatus(502);
+            }
+            console.log('OSDI POST successful! ', httpResponse.headers.status);
+            res.send('It worked!');
+          }
+        );
+      }
+    }
   }
 });
 module.exports = router;
