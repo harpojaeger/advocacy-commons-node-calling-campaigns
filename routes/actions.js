@@ -98,6 +98,7 @@ router.post('/:campaign', function(req, res) {
     }
   } else {
     console.log('No endpoint found for ' + req.originalUrl);
+    res.sendStatus(404);
   }
 });
 module.exports = router;
