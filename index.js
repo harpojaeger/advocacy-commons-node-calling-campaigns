@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-var act = require('./routes/act')
+var actions = require('./routes/actions')
 fs = require('fs');
 
 app.set('port', (process.env.PORT || 5000));
@@ -9,7 +9,7 @@ app.set('view engine', 'pug')
 
 app.use(express.static(__dirname + '/public'));
 
-app.use('/act', act)
+app.use('/actions', actions)
 
 
 app.get('*', function(req, res) {
