@@ -12,7 +12,20 @@ router.use(function timeLog (req, res, next) {
 })
 // define the home page route
 router.get('/', function (req, res) {
-  res.send('List of available actions.');
+
+  all_campaign_data = campaigns.load();
+  var campaign_list = {};
+  for(var slug in all_campaign_data) {
+    if(all_campaign_data.hasOwnProperty(slug)) {
+      this_campaign = all_campaign_data[slug]
+      campaign_list[slug] = {
+        "title" : this_campaign.titles.form,
+        "url" : "/" + slug
+    };
+    }
+
+  }
+  res.send(campaign_list);
 })
 
 router.use('/:campaign', function(req, res, next) {
