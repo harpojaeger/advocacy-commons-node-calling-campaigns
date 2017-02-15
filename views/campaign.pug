@@ -4,11 +4,8 @@ html
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', type='text/css', href='/style/style.css')
-    script(type='text/javascript', src='/lib/jquery.js')
-    script(type='text/javascript', src='/lib/jquery.osdi.js')
-    script(type='text/javascript', src='/lib/parsley.js')
     script(type='text/javascript', src='/app/validate.js')
-    script(type='text/javascript', src='/app/load.js')
+    script(type='text/javascript', src='js/app.js')
     script(type='text/javascript')
       include includes/fb.js
     meta(property="og:url", content=this_url)
@@ -29,6 +26,7 @@ html
             #form_title= campaign.titles.form
           #form_container
             form#caller_data
+              input#hidden_campaign_slug(type='hidden', value=this_slug)
               ul#main_form_elements
                 li
                   input#email_address(type='text', placeholder='Email address', data-parsley-required, data-parsley-type='email', data-parsley-type-message='Please enter a valid email address.')
