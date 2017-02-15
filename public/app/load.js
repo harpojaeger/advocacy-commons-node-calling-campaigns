@@ -112,17 +112,17 @@ module.exports = {
 				function optionalCallBack(err, httpResponse, body) {
 					if (err) {
 						console.error('POST to internal endpoint failed!');
-						res.send('It failed!').sendStatus(502);
 						alert('Uh oh, there was an error submitting your info.  Try reloading the page and filling out the form again.');
+					} else {
+						console.log('POST to internal endpoint succeeded!');
+						res.send('It worked!');
+						$('div#form_teaser, div#form_full_desc').slideUp();
+						$('div.after-submit-reveal').slideDown();
+						$('div#form_container')
+						  .fadeTo(500,0.2)
+						  .addClass('disabled');
+						$('input').attr('disabled','true');
 					}
-					console.log('POST to internal endpoint succeeded!', httpResponse.headers.status);
-					res.send('It worked!');
-					$('div#form_teaser, div#form_full_desc').slideUp();
-					$('div.after-submit-reveal').slideDown();
-					$('div#form_container')
-					  .fadeTo(500,0.2)
-					  .addClass('disabled');
-					$('input').attr('disabled','true');
 				}
 			);
 
