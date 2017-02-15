@@ -2,11 +2,13 @@ var express = require('express')
 var router = express.Router();
 var request = require('request');
 var campaigns = require(__dirname + '/../campaigns');
+var browserify = require('browserify-middleware');
 
 // middleware that is specific to this router
 router.use(function timeLog (req, res, next) {
   // this_url seems to get used a lot, so let's define it once per request.
   this_url = req.protocol + '://' + req.get('host') + req.originalUrl;
+  res.locals.this_url = this_url;
   console.log(Date.now() + ' ' + req.originalUrl);
   next();
 })
@@ -28,7 +30,13 @@ router.get('/', function (req, res) {
   res.send(campaign_list);
 })
 
+// Provide jQuery, jQuery OSDI (for now) and parsleyjs to the browser for form handling.
+//router.get('/js/bundle.js', browserify(['jquery', 'jquery-osdi', 'parsleyjs']));
+
+//Provide some user scripts to the browser (soon to be deprecated).
+router.get('/js/app.js', browserify(__dirname + '/../public/app/main.js'));
 router.use('/:campaign', function(req, res, next) {
+
   if( !(this_campaign = campaigns.load(req.params.campaign)) ) {
     console.log('Campaign not found.');
     res.sendStatus(404).end();
@@ -48,7 +56,7 @@ router.get('/:campaign', function(req, res) {
 });
 
 // Handle submitted data from a campaign – flexibly.
-router.post('/:campaign', function(req, res) {
+router.post('/submit', function(req, res) {
   console.dir(req.body);
 
   // We're gonna submit objects like so:
