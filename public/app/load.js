@@ -1,5 +1,6 @@
 var $ = require('jquery');
 var parsley = require('parsleyjs');
+var request = require('request');
 module.exports = {
 	excitingFormElements: function(){
 		$('a#terms_link').click(function(){
@@ -105,26 +106,48 @@ module.exports = {
 			}
 
 		  console.log(request_body);
-			$(form)
-			.osdi({
-				endpoint: 'http://ac-node-calling-campaigns.herokuapp.com/actions/submit',
-				body: request_body,
-				immediate: true,
-				done: function(data, status) {
-					console.log('Submitted data.');
+			request.post(
+				'https://ac-node-calling-campaigns.herokuapp.com/actions/submit',
+				{ json: request_body },
+				function optionalCallBack(err, httpResponse, body) {
+					if (err) {
+						console.error('POST to internal endpoint failed!');
+						res.send('It failed!').sendStatus(502);
+						alert('Uh oh, there was an error submitting your info.  Try reloading the page and filling out the form again.');
+					}
+					console.log('POST to internal endpoint succeeded!', httpResponse.headers.status);
+					res.send('It worked!');
 					$('div#form_teaser, div#form_full_desc').slideUp();
 					$('div.after-submit-reveal').slideDown();
 					$('div#form_container')
 					  .fadeTo(500,0.2)
 					  .addClass('disabled');
 					$('input').attr('disabled','true');
-				},
-				fail : function(jqXHR, textStatus, errorThrown) {
-					console.log('Error ' + errorThrown + ' ' + textStatus);
-					console.log(jqXHR);
-					alert('Uh oh, there was an error submitting your info.  Try reloading the page and filling out the form again.');
 				}
-			});
+			);
+
+
+
+			// $(form)
+			// .osdi({
+			// 	endpoint: 'http://ac-node-calling-campaigns.herokuapp.com/actions/submit',
+			// 	body: request_body,
+			// 	immediate: true,
+			// 	done: function(data, status) {
+			// 		console.log('Submitted data.');
+			// 		$('div#form_teaser, div#form_full_desc').slideUp();
+			// 		$('div.after-submit-reveal').slideDown();
+			// 		$('div#form_container')
+			// 		  .fadeTo(500,0.2)
+			// 		  .addClass('disabled');
+			// 		$('input').attr('disabled','true');
+			// 	},
+			// 	fail : function(jqXHR, textStatus, errorThrown) {
+			// 		console.log('Error ' + errorThrown + ' ' + textStatus);
+			// 		console.log(jqXHR);
+			// 		alert('Uh oh, there was an error submitting your info.  Try reloading the page and filling out the form again.');
+			// 	}
+			// });
 		})
 		.on('form:error',function(){
 		  console.log('Validation errors: form not submitted.');
