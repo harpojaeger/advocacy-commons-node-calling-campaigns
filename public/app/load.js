@@ -115,7 +115,6 @@ module.exports = {
 						alert('Uh oh, there was an error submitting your info.  Try reloading the page and filling out the form again.');
 					} else {
 						console.log('POST to internal endpoint succeeded!');
-						res.send('It worked!');
 						$('div#form_teaser, div#form_full_desc').slideUp();
 						$('div.after-submit-reveal').slideDown();
 						$('div#form_container')
